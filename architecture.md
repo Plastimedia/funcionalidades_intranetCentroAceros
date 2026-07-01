@@ -185,7 +185,8 @@ Aparece en el panel de Tecnología (listado/tablero por estado)
 
 - Login con email/usuario corporativo y contraseña (Laravel Sanctum, sesión).
 - Cada usuario pertenece a exactamente un rol: `empleado`, `rrhh` o `tecnologia`.
-- La creación de usuarios es administrativa (no hay registro público). Definir si la crea un usuario `rrhh` con permiso especial o si se hace mediante un seeder/importación inicial — **a confirmar con el negocio antes de implementar**.
+- La creación de usuarios es estrictamente administrativa (no hay registro público, no existe página de "Registrarse").
+- **Solo los usuarios con el rol `rrhh` tienen el permiso para crear/registrar nuevos usuarios** (empleados u otros roles) desde su panel de administración.
 - Recuperación de contraseña vía el flujo estándar de Laravel (correo con enlace firmado).
 
 ### 4.2 Publicaciones (noticias, comunicados, y una tercera categoría a definir)
@@ -253,5 +254,4 @@ Aparece en el panel de Tecnología (listado/tablero por estado)
 - Esquema exacto de columnas del CSV de nómina.
 - Campos exactos del formulario de carta laboral (motivo, destinatario, etc.).
 - Campos exactos del formulario de anticipo (monto, motivo, ¿límites o reglas de aprobación automática por monto?).
-- Campos exactos del formulario de ticket (¿categoría, prioridad, archivo adjunto?).
-- Proceso de alta de usuarios nuevos (¿quién los crea y cómo se les asigna rol inicial?).
+- Campos exactos del formulario de ticket (¿categoría, prioridad, archivo adjunto?).

@@ -5,8 +5,8 @@ Este es el repositorio oficial de la Intranet Corporativa de Centroaceros, desar
 ## 🚀 Requisitos Previos
 
 Asegúrate de tener instalados los siguientes programas en tu entorno local antes de comenzar:
-- **XAMPP** (con Apache y MySQL encendidos).
-- **PHP 8.3** (asegúrate de que está bien configurado en XAMPP y accesible desde tu terminal).
+- **WampServer** (con Apache y MySQL encendidos).
+- **PHP 8.3** (asegúrate de que está bien configurado en WampServer y accesible desde tu terminal).
 - **Composer**.
 - **Node.js** (versión 18 o superior).
 
@@ -32,7 +32,7 @@ Sigue estos pasos si acabas de clonar el proyecto por primera vez:
      ```bash
      php artisan key:generate
      ```
-   - Abre tu `.env` y asegúrate de que la conexión a base de datos sea correcta para tu XAMPP:
+   - Abre tu `.env` y asegúrate de que la conexión a base de datos sea correcta para tu WampServer:
      ```ini
      DB_CONNECTION=mysql
      DB_HOST=127.0.0.1
@@ -51,7 +51,7 @@ Sigue estos pasos si acabas de clonar el proyecto por primera vez:
 
 Para simplificar el desarrollo y no tener que abrir varias consolas, hemos creado un comando único que arranca todos los servicios necesarios al mismo tiempo.
 
-Solo asegúrate de tener XAMPP encendido (Apache y MySQL) y ejecuta en tu terminal:
+Solo asegúrate de tener WampServer encendido (Apache y MySQL) y ejecuta en tu terminal:
 
 ```bash
 npm run start
