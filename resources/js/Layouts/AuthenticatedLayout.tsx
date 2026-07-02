@@ -21,9 +21,13 @@ export default function Authenticated({
                     <div className="flex h-16 justify-between">
                         <div className="flex">
                             <div className="flex shrink-0 items-center">
-                                <Link href="/">
-                                    <ApplicationLogo className="block h-10 w-auto fill-current text-blue-900 drop-shadow-sm transition-transform hover:scale-105" />
-                                </Link>
+                <Link href="/">
+                    <img
+                        src="/images/logo_centro_aceros.png"
+                        alt="Logo"
+                        className="h-16 w-auto"
+                    />
+                </Link>
                             </div>
 
                             <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
@@ -31,7 +35,7 @@ export default function Authenticated({
                                     href={route('dashboard')}
                                     active={route().current('dashboard')}
                                 >
-                                    Dashboard
+                                    Inicio
                                 </NavLink>
                             </div>
                         </div>
@@ -67,7 +71,7 @@ export default function Authenticated({
                                         <Dropdown.Link
                                             href={route('profile.edit')}
                                         >
-                                            Profile
+                                            Perfil
                                         </Dropdown.Link>
                                         {user.roles?.includes('rrhh') && (
                                             <Dropdown.Link
@@ -81,7 +85,7 @@ export default function Authenticated({
                                             method="post"
                                             as="button"
                                         >
-                                            Log Out
+                                            Cerrar Sesión
                                         </Dropdown.Link>
                                     </Dropdown.Content>
                                 </Dropdown>
@@ -158,7 +162,7 @@ export default function Authenticated({
 
                         <div className="mt-3 space-y-1">
                             <ResponsiveNavLink href={route('profile.edit')}>
-                                Profile
+                                Perfil
                             </ResponsiveNavLink>
                             {user.roles?.includes('rrhh') && (
                                 <ResponsiveNavLink href={route('admin.dashboard')}>
@@ -170,7 +174,7 @@ export default function Authenticated({
                                 href={route('logout')}
                                 as="button"
                             >
-                                Log Out
+                                Cerrar Sesión
                             </ResponsiveNavLink>
                         </div>
                     </div>

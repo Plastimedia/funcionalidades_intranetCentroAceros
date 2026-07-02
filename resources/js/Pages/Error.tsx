@@ -23,9 +23,13 @@ export default function Error({ status }: { status: number }) {
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
 
             <div className="relative z-10 overflow-hidden rounded-3xl bg-white/95 p-8 text-center shadow-[0_8px_30px_rgb(0,0,0,0.2)] backdrop-blur-2xl ring-1 ring-white/50 sm:p-12 transition-all duration-300 hover:shadow-[0_8px_40px_rgb(0,0,0,0.3)]">
-                <div className="mb-6 flex justify-center">
-                    <ApplicationLogo className="h-20 w-[200px] relative block fill-current text-blue-900 drop-shadow-sm" style={{ maxWidth: 200 }} />
-                </div>
+                <Link href="/">
+                    <img
+                        src="/images/logo_centro_aceros.png"
+                        alt="Logo"
+                        className="h-16 w-auto"
+                    />
+                </Link>
 
                 <h1 className="mt-4 text-7xl font-extrabold tracking-tight text-blue-600 drop-shadow-sm">
                     {status}
