@@ -168,7 +168,6 @@ export default function Authenticated({
                             <span>Cerrar sesión</span>
                         </Link>
                     </div>
-
                     {/* Botón Menú Mobile */}
                     <div className="flex items-center sm:hidden">
                         <button
