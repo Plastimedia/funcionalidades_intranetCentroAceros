@@ -9,13 +9,9 @@ export default function Guest({ children }: PropsWithChildren) {
             
             <div className="relative z-10 w-full max-w-md overflow-hidden rounded-3xl bg-white/95 p-8 shadow-[0_8px_30px_rgb(0,0,0,0.2)] backdrop-blur-2xl ring-1 ring-white/50 sm:p-10 transition-all duration-300 hover:shadow-[0_8px_40px_rgb(0,0,0,0.3)]">
                 <div className="mb-8 flex flex-col items-center justify-center">
-                <Link href="/">
-                    <img
-                        src="/images/logo_centro_aceros.png"
-                        alt="Logo"
-                        className="h-16 w-auto"
-                    />
-                </Link>
+                    <Link href="/">
+                        <ApplicationLogo className="block h-10 w-auto fill-current text-blue-900 drop-shadow-sm transition-transform hover:scale-105" />
+                    </Link>
                     <h2 className="mt-6 text-center text-2xl font-bold tracking-tight text-slate-900">
                         Intranet Corporativa
                     </h2>

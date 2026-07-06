@@ -28,13 +28,9 @@ export default function AdminLayout({
                 }`}
             >
                 <div className="flex h-16 shrink-0 items-center justify-center border-b border-slate-200/50">
-                <Link href="/">
-                    <img
-                        src="/images/logo_centro_aceros.png"
-                        alt="Logo"
-                        className="h-16 w-auto"
-                    />
-                </Link>
+                    <Link href="/">
+                        <ApplicationLogo className="block h-10 w-auto fill-current text-blue-900 drop-shadow-sm transition-transform hover:scale-105" />
+                    </Link>
                 </div>
                 
                 <div className="flex flex-1 flex-col overflow-y-auto px-4 py-6">
