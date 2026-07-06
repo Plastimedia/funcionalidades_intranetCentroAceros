@@ -112,68 +112,62 @@ export default function Authenticated({
                         <span className="text-lg font-bold text-slate-800 tracking-tight">Intranet Centro Aceros</span>
                     </div>
 
-                            <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink
-                                    href={route('dashboard')}
-                                    active={route().current('dashboard')}
+                    {/* Acciones de Usuario en Desktop */}
+                    <div className="hidden sm:flex sm:items-center sm:space-x-6">
+                        {/* Dropdown de Usuario con Icono */}
+                        <Dropdown>
+                            <Dropdown.Trigger>
+                                <button
+                                    type="button"
+                                    className="inline-flex items-center space-x-2 rounded-xl py-1.5 px-3 text-sm font-bold text-slate-700 hover:bg-slate-50 hover:text-blue-600 transition-colors focus:outline-none"
                                 >
-                                    Dashboard
-                                </NavLink>
-                            </div>
-                        </div>
+                                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-50 text-blue-600 ring-2 ring-blue-100 font-extrabold text-xs">
+                                        <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                        </svg>
+                                    </div>
+                                    <span>{user.name}</span>
+                                    <svg className="h-4 w-4 text-slate-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                                    </svg>
+                                </button>
+                            </Dropdown.Trigger>
 
-                        <div className="hidden sm:ms-6 sm:flex sm:items-center">
-                            <div className="relative ms-3">
-                                <Dropdown>
-                                    <Dropdown.Trigger>
-                                        <span className="inline-flex rounded-md">
-                                            <button
-                                                type="button"
-                                                className="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none"
-                                            >
-                                                {user.name}
+                            <Dropdown.Content>
+                                <Dropdown.Link href={route('profile.edit')}>
+                                    Mi perfil
+                                </Dropdown.Link>
+                                {user.roles?.includes('rrhh') && (
+                                    <Dropdown.Link href={route('admin.dashboard')}>
+                                        ⚙️ Administración RRHH
+                                    </Dropdown.Link>
+                                )}
+                                <Dropdown.Link href={route('logout')} method="post" as="button">
+                                    Cerrar sesión
+                                </Dropdown.Link>
+                            </Dropdown.Content>
+                        </Dropdown>
 
-                                                <svg
-                                                    className="-me-0.5 ms-2 h-4 w-4"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 0 20 20"
-                                                    fill="currentColor"
-                                                >
-                                                    <path
-                                                        fillRule="evenodd"
-                                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                        clipRule="evenodd"
-                                                    />
-                                                </svg>
-                                            </button>
-                                        </span>
-                                    </Dropdown.Trigger>
-
-                                    <Dropdown.Content>
-                                        <Dropdown.Link
-                                            href={route('profile.edit')}
-                                        >
-                                            Profile
-                                        </Dropdown.Link>
-                                        {user.roles?.includes('rrhh') && (
-                                            <Dropdown.Link
-                                                href={route('admin.dashboard')}
-                                            >
-                                                Administración
-                                            </Dropdown.Link>
-                                        )}
-                                        <Dropdown.Link
-                                            href={route('logout')}
-                                            method="post"
-                                            as="button"
-                                        >
-                                            Log Out
-                                        </Dropdown.Link>
-                                    </Dropdown.Content>
-                                </Dropdown>
-                            </div>
-                        </div>
-
+                        {/* Enlaces Directos como en el diseño */}
+                        <Link 
+                            href={route('profile.edit')}
+                            className="text-sm font-semibold text-blue-600 hover:text-blue-800 transition-colors"
+                        >
+                            Mi perfil
+                        </Link>
+                        
+                        <Link 
+                            href={route('logout')} 
+                            method="post" 
+                            as="button"
+                            className="inline-flex items-center space-x-1.5 text-sm font-semibold text-blue-600 hover:text-blue-800 transition-colors"
+                        >
+                            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                            </svg>
+                            <span>Cerrar sesión</span>
+                        </Link>
+                    </div>
                     {/* Botón Menú Mobile */}
                     <div className="flex items-center sm:hidden">
                         <button
@@ -194,34 +188,25 @@ export default function Authenticated({
                         <div className="text-base font-bold text-slate-800">{user.name}</div>
                         <div className="text-xs text-slate-500">{user.email}</div>
                     </div>
-
-                    <div className="border-t border-gray-200 pb-1 pt-4">
-                        <div className="px-4">
-                            <div className="text-base font-medium text-gray-800">
-                                {user.name}
-                            </div>
-                            <div className="text-sm font-medium text-gray-500">
-                                {user.email}
-                            </div>
-                        </div>
-
-                        <div className="mt-3 space-y-1">
-                            <ResponsiveNavLink href={route('profile.edit')}>
-                                Profile
+                    <div className="space-y-1">
+                        {menuItems.map((item) => (
+                            <ResponsiveNavLink key={item.name} href={item.href} active={item.active}>
+                                <div className="flex items-center space-x-3">
+                                    {item.icon}
+                                    <span>{item.name}</span>
+                                </div>
                             </ResponsiveNavLink>
-                            {user.roles?.includes('rrhh') && (
-                                <ResponsiveNavLink href={route('admin.dashboard')}>
-                                    Administración
-                                </ResponsiveNavLink>
-                            )}
-                            <ResponsiveNavLink
-                                method="post"
-                                href={route('logout')}
-                                as="button"
-                            >
-                                Log Out
-                            </ResponsiveNavLink>
-                        </div>
+                        ))}
+                    </div>
+                    <div className="pt-2 border-t border-slate-100 flex flex-col space-y-2">
+                        {user.roles?.includes('rrhh') && (
+                            <Link href={route('admin.dashboard')} className="block py-2 px-3 text-sm font-bold text-blue-600 bg-blue-50 rounded-xl">
+                                ⚙️ Módulo Administración RRHH
+                            </Link>
+                        )}
+                        <Link href={route('logout')} method="post" as="button" className="text-left py-2 px-3 text-sm font-bold text-rose-600 rounded-xl hover:bg-rose-50">
+                            Cerrar sesión
+                        </Link>
                     </div>
                 </div>
             </header>
