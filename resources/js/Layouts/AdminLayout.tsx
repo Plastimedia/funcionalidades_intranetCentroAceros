@@ -83,19 +83,45 @@ export default function AdminLayout({
                             </p>
                         </div>
                         
-                        {/* Placeholders */}
-                        <a href="#" className="group flex items-center rounded-2xl px-4 py-3.5 text-sm font-semibold text-slate-400 cursor-not-allowed opacity-60">
-                            <svg className="mr-3 h-5 w-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <Link
+                            href={route('admin.payroll-certificates.index')}
+                            className={`flex items-center space-x-3 rounded-xl px-4 py-3 transition-colors ${
+                                route().current('admin.payroll-certificates.*') 
+                                    ? 'bg-blue-600 text-white shadow-md shadow-blue-500/20' 
+                                    : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900'
+                            }`}
+                        >
+                            <svg className="h-5 w-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                             </svg>
-                            Certificados Nómina
-                        </a>
-                        <a href="#" className="group flex items-center rounded-2xl px-4 py-3.5 text-sm font-semibold text-slate-400 cursor-not-allowed opacity-60">
-                            <svg className="mr-3 h-5 w-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <span className="font-medium">Certificados Nómina</span>
+                        </Link>
+                        <Link
+                            href={route('admin.work-certificates.index')}
+                            className={`flex items-center space-x-3 rounded-xl px-4 py-3 transition-colors ${
+                                route().current('admin.work-certificates.*') 
+                                    ? 'bg-blue-600 text-white shadow-md shadow-blue-500/20' 
+                                    : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900'
+                            }`}
+                        >
+                            <svg className="h-5 w-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
                             </svg>
-                            Cartas Laborales
-                        </a>
+                            <span className="font-medium">Cartas Laborales</span>
+                        </Link>
+                        <Link
+                            href={route('admin.anticipos.index')}
+                            className={`flex items-center space-x-3 rounded-xl px-4 py-3 transition-colors ${
+                                route().current('admin.anticipos.*') 
+                                    ? 'bg-blue-600 text-white shadow-md shadow-blue-500/20' 
+                                    : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900'
+                            }`}
+                        >
+                            <svg className="h-5 w-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <span className="font-medium">Anticipos Salariales</span>
+                        </Link>
                         <a href="#" className="group flex items-center rounded-2xl px-4 py-3.5 text-sm font-semibold text-slate-400 cursor-not-allowed opacity-60">
                             <svg className="mr-3 h-5 w-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />

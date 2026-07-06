@@ -35,7 +35,20 @@ class UserController extends Controller
             'password' => ['required', Password::defaults()],
             'role' => 'required|exists:roles,name',
             'is_active' => 'boolean',
+            'document_type' => 'required|string|max:50',
+            'identification' => 'required|string|max:50|unique:users',
+            'position' => 'required|string|max:255',
+            'department' => 'required|string|max:255',
+            'contract_type' => 'required|string|max:100',
+            'base_salary' => 'required|numeric|min:0',
+            'monthly_bonuses' => 'required|numeric|min:0',
+            'signature' => 'nullable|file|mimes:png|max:2048',
         ]);
+
+        $signaturePath = null;
+        if ($request->hasFile('signature')) {
+            $signaturePath = $request->file('signature')->store('signatures', 'public');
+        }
 
         $user = User::create([
             'name' => $request->name,
@@ -43,6 +56,14 @@ class UserController extends Controller
             'password' => Hash::make($request->password),
             'must_change_password' => true,
             'is_active' => $request->boolean('is_active', true),
+            'document_type' => $request->document_type,
+            'identification' => $request->identification,
+            'position' => $request->position,
+            'department' => $request->department,
+            'contract_type' => $request->contract_type,
+            'base_salary' => $request->base_salary,
+            'monthly_bonuses' => $request->monthly_bonuses,
+            'signature_path' => $signaturePath,
         ]);
 
         $user->assignRole($request->role);
@@ -65,13 +86,34 @@ class UserController extends Controller
             'email' => 'required|string|email|max:255|unique:users,email,'.$user->id,
             'role' => 'required|exists:roles,name',
             'is_active' => 'boolean',
+            'document_type' => 'required|string|max:50',
+            'identification' => 'required|string|max:50|unique:users,identification,'.$user->id,
+            'position' => 'required|string|max:255',
+            'department' => 'required|string|max:255',
+            'contract_type' => 'required|string|max:100',
+            'base_salary' => 'required|numeric|min:0',
+            'monthly_bonuses' => 'required|numeric|min:0',
+            'signature' => 'nullable|file|mimes:png|max:2048',
         ]);
 
-        $user->update([
+        $updateData = [
             'name' => $request->name,
             'email' => $request->email,
             'is_active' => $request->boolean('is_active', true),
-        ]);
+            'document_type' => $request->document_type,
+            'identification' => $request->identification,
+            'position' => $request->position,
+            'department' => $request->department,
+            'contract_type' => $request->contract_type,
+            'base_salary' => $request->base_salary,
+            'monthly_bonuses' => $request->monthly_bonuses,
+        ];
+
+        if ($request->hasFile('signature')) {
+            $updateData['signature_path'] = $request->file('signature')->store('signatures', 'public');
+        }
+
+        $user->update($updateData);
 
         if ($request->filled('password')) {
             $request->validate(['password' => ['required', Password::defaults()]]);
