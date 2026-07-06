@@ -13,6 +13,14 @@ export default function Create({ roles }: { roles: any[] }) {
         password: '',
         role: '',
         is_active: true,
+        document_type: '',
+        identification: '',
+        position: '',
+        department: '',
+        contract_type: '',
+        base_salary: '',
+        monthly_bonuses: '0',
+        signature: null as File | null,
     });
 
     const submit: FormEventHandler = (e) => {
@@ -37,72 +45,224 @@ export default function Create({ roles }: { roles: any[] }) {
         >
             <Head title="Crear Usuario" />
 
-            <div className="mx-auto max-w-2xl rounded-3xl bg-white p-8 shadow-sm ring-1 ring-slate-100">
-                <form onSubmit={submit} className="space-y-6">
+            <div className="mx-auto max-w-4xl rounded-3xl bg-white p-8 shadow-sm ring-1 ring-slate-100">
+                <form onSubmit={submit} className="space-y-8">
+                    {/* SECCIÓN 1: INFORMACIÓN PERSONAL Y DE ACCESO */}
                     <div>
-                        <InputLabel htmlFor="name" value="Nombre Completo" />
-                        <TextInput
-                            id="name"
-                            name="name"
-                            value={data.name}
-                            className="mt-1 block w-full"
-                            autoComplete="name"
-                            isFocused={true}
-                            onChange={(e) => setData('name', e.target.value)}
-                        />
-                        <InputError message={errors.name} className="mt-2" />
+                        <h3 className="text-lg font-bold text-slate-900 pb-3 border-b border-slate-100 mb-6 flex items-center gap-2">
+                            <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-blue-50 text-xs font-extrabold text-blue-600 ring-1 ring-blue-500/20">1</span>
+                            Información Personal y de Acceso
+                        </h3>
+                        
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div className="md:col-span-2">
+                                <InputLabel htmlFor="name" value="Nombre Completo *" />
+                                <TextInput
+                                    id="name"
+                                    name="name"
+                                    value={data.name}
+                                    className="mt-1 block w-full"
+                                    autoComplete="name"
+                                    isFocused={true}
+                                    placeholder="Ej: Juan David Pérez Gómez"
+                                    onChange={(e) => setData('name', e.target.value)}
+                                />
+                                <InputError message={errors.name} className="mt-2" />
+                            </div>
+
+                            <div>
+                                <InputLabel htmlFor="document_type" value="Tipo de Documento *" />
+                                <select
+                                    id="document_type"
+                                    name="document_type"
+                                    value={data.document_type}
+                                    className="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm text-sm"
+                                    onChange={(e) => setData('document_type', e.target.value)}
+                                >
+                                    <option value="" disabled>Selecciona tipo de documento</option>
+                                    <option value="Cédula de ciudadanía">Cédula de ciudadanía</option>
+                                    <option value="Cédula de extranjería">Cédula de extranjería</option>
+                                    <option value="Tarjeta de identidad">Tarjeta de identidad</option>
+                                    <option value="Pasaporte">Pasaporte</option>
+                                </select>
+                                <InputError message={errors.document_type} className="mt-2" />
+                            </div>
+
+                            <div>
+                                <InputLabel htmlFor="identification" value="Número de Documento *" />
+                                <TextInput
+                                    id="identification"
+                                    name="identification"
+                                    value={data.identification}
+                                    className="mt-1 block w-full"
+                                    placeholder="Ej: 1020304050"
+                                    onChange={(e) => setData('identification', e.target.value)}
+                                />
+                                <InputError message={errors.identification} className="mt-2" />
+                            </div>
+
+                            <div>
+                                <InputLabel htmlFor="email" value="Correo Electrónico *" />
+                                <TextInput
+                                    id="email"
+                                    type="email"
+                                    name="email"
+                                    value={data.email}
+                                    className="mt-1 block w-full"
+                                    autoComplete="username"
+                                    placeholder="correo@centroaceros.com"
+                                    onChange={(e) => setData('email', e.target.value)}
+                                />
+                                <InputError message={errors.email} className="mt-2" />
+                            </div>
+
+                            <div>
+                                <InputLabel htmlFor="role" value="Rol en el Sistema *" />
+                                <select
+                                    id="role"
+                                    name="role"
+                                    value={data.role}
+                                    className="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm text-sm"
+                                    onChange={(e) => setData('role', e.target.value)}
+                                >
+                                    <option value="" disabled>Selecciona un rol</option>
+                                    {roles.map((role) => (
+                                        <option key={role.id} value={role.name}>
+                                            {role.name}
+                                        </option>
+                                    ))}
+                                </select>
+                                <InputError message={errors.role} className="mt-2" />
+                            </div>
+
+                            <div className="md:col-span-2">
+                                <InputLabel htmlFor="password" value="Contraseña Temporal *" />
+                                <TextInput
+                                    id="password"
+                                    type="password"
+                                    name="password"
+                                    value={data.password}
+                                    className="mt-1 block w-full"
+                                    autoComplete="new-password"
+                                    onChange={(e) => setData('password', e.target.value)}
+                                />
+                                <p className="mt-1 text-xs text-slate-500">
+                                    El usuario deberá cambiar esta contraseña la primera vez que inicie sesión en la intranet.
+                                </p>
+                                <InputError message={errors.password} className="mt-2" />
+                            </div>
+                        </div>
                     </div>
 
+                    {/* SECCIÓN 2: INFORMACIÓN LABORAL Y SALARIAL */}
                     <div>
-                        <InputLabel htmlFor="email" value="Correo Electrónico" />
-                        <TextInput
-                            id="email"
-                            type="email"
-                            name="email"
-                            value={data.email}
-                            className="mt-1 block w-full"
-                            autoComplete="username"
-                            onChange={(e) => setData('email', e.target.value)}
-                        />
-                        <InputError message={errors.email} className="mt-2" />
+                        <h3 className="text-lg font-bold text-slate-900 pb-3 border-b border-slate-100 mb-6 flex items-center gap-2">
+                            <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-blue-50 text-xs font-extrabold text-blue-600 ring-1 ring-blue-500/20">2</span>
+                            Información Laboral y Salarial
+                        </h3>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <InputLabel htmlFor="position" value="Cargo *" />
+                                <TextInput
+                                    id="position"
+                                    name="position"
+                                    value={data.position}
+                                    className="mt-1 block w-full"
+                                    placeholder="Ej: Analista de Compras"
+                                    onChange={(e) => setData('position', e.target.value)}
+                                />
+                                <InputError message={errors.position} className="mt-2" />
+                            </div>
+
+                            <div>
+                                <InputLabel htmlFor="department" value="Área a la que pertenece *" />
+                                <TextInput
+                                    id="department"
+                                    name="department"
+                                    value={data.department}
+                                    className="mt-1 block w-full"
+                                    placeholder="Ej: Administrativa y Financiera"
+                                    onChange={(e) => setData('department', e.target.value)}
+                                />
+                                <InputError message={errors.department} className="mt-2" />
+                            </div>
+
+                            <div className="md:col-span-2">
+                                <InputLabel htmlFor="contract_type" value="Tipo de Contrato *" />
+                                <select
+                                    id="contract_type"
+                                    name="contract_type"
+                                    value={data.contract_type}
+                                    className="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm text-sm"
+                                    onChange={(e) => setData('contract_type', e.target.value)}
+                                >
+                                    <option value="" disabled>Selecciona tipo de contrato</option>
+                                    <option value="Término Indefinido">Término Indefinido</option>
+                                    <option value="Término Fijo">Término Fijo</option>
+                                    <option value="Obra o Labor">Obra o Labor</option>
+                                    <option value="Prestación de Servicios">Prestación de Servicios</option>
+                                    <option value="Aprendizaje">Aprendizaje</option>
+                                </select>
+                                <InputError message={errors.contract_type} className="mt-2" />
+                            </div>
+
+                            <div>
+                                <InputLabel htmlFor="base_salary" value="Salario Base ($) *" />
+                                <TextInput
+                                    id="base_salary"
+                                    type="number"
+                                    step="any"
+                                    min="0"
+                                    name="base_salary"
+                                    value={data.base_salary}
+                                    className="mt-1 block w-full"
+                                    placeholder="Ej: 2500000"
+                                    onChange={(e) => setData('base_salary', e.target.value)}
+                                />
+                                <InputError message={errors.base_salary} className="mt-2" />
+                            </div>
+
+                            <div>
+                                <InputLabel htmlFor="monthly_bonuses" value="Bonificaciones Mensuales ($) *" />
+                                <TextInput
+                                    id="monthly_bonuses"
+                                    type="number"
+                                    step="any"
+                                    min="0"
+                                    name="monthly_bonuses"
+                                    value={data.monthly_bonuses}
+                                    className="mt-1 block w-full"
+                                    placeholder="Ej: 200000 (0 si no aplica)"
+                                    onChange={(e) => setData('monthly_bonuses', e.target.value)}
+                                />
+                                <InputError message={errors.monthly_bonuses} className="mt-2" />
+                            </div>
+                        </div>
                     </div>
 
+                    {/* SECCIÓN 3: FIRMA DIGITAL (OPCIONAL - SÓLO RRHH / DIRECTIVOS) */}
                     <div>
-                        <InputLabel htmlFor="role" value="Rol en el Sistema" />
-                        <select
-                            id="role"
-                            name="role"
-                            value={data.role}
-                            className="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                            onChange={(e) => setData('role', e.target.value)}
-                        >
-                            <option value="" disabled>Selecciona un rol</option>
-                            {roles.map((role) => (
-                                <option key={role.id} value={role.name}>
-                                    {role.name}
-                                </option>
-                            ))}
-                        </select>
-                        <InputError message={errors.role} className="mt-2" />
+                        <h3 className="text-lg font-bold text-slate-900 pb-3 border-b border-slate-100 mb-6 flex items-center gap-2">
+                            <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-blue-50 text-xs font-extrabold text-blue-600 ring-1 ring-blue-500/20">3</span>
+                            Firma Digital para Certificados (Sólo PNG)
+                        </h3>
+                        
+                        <div className="rounded-2xl bg-slate-50/80 border border-slate-200/80 p-6">
+                            <InputLabel htmlFor="signature" value="Imagen de Firma (Formato PNG transparente, opcional)" />
+                            <p className="text-xs text-slate-500 mt-1 mb-4">Recomendado para personal de Recursos Humanos o directivos autorizados para firmar cartas laborales.</p>
+                            <input
+                                id="signature"
+                                type="file"
+                                accept="image/png"
+                                className="block w-full text-sm text-slate-600 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 cursor-pointer border border-slate-200 rounded-xl bg-white"
+                                onChange={(e) => setData('signature', e.target.files ? e.target.files[0] : null)}
+                            />
+                            <InputError message={errors.signature} className="mt-2" />
+                        </div>
                     </div>
 
-                    <div>
-                        <InputLabel htmlFor="password" value="Contraseña Temporal" />
-                        <TextInput
-                            id="password"
-                            type="password"
-                            name="password"
-                            value={data.password}
-                            className="mt-1 block w-full"
-                            autoComplete="new-password"
-                            onChange={(e) => setData('password', e.target.value)}
-                        />
-                        <p className="mt-2 text-xs text-slate-500">
-                            El usuario deberá cambiar esta contraseña la primera vez que inicie sesión.
-                        </p>
-                        <InputError message={errors.password} className="mt-2" />
-                    </div>
-
+                    {/* SECCIÓN 4: ESTADO DEL USUARIO */}
                     <div className="flex items-center rounded-xl bg-slate-50 p-4 ring-1 ring-slate-200">
                         <label className="relative inline-flex cursor-pointer items-center">
                             <input
@@ -119,9 +279,15 @@ export default function Create({ roles }: { roles: any[] }) {
                         </p>
                     </div>
 
-                    <div className="flex items-center justify-end pt-4">
-                        <PrimaryButton className="ml-4" disabled={processing}>
-                            Crear Usuario
+                    <div className="flex items-center justify-end pt-4 border-t border-slate-100">
+                        <Link
+                            href={route('admin.users.index')}
+                            className="rounded-xl border border-slate-300 bg-white px-5 py-2.5 text-sm font-medium text-slate-700 shadow-sm hover:bg-slate-50 focus:outline-none transition-all mr-4"
+                        >
+                            Cancelar
+                        </Link>
+                        <PrimaryButton className="px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold" disabled={processing}>
+                            Crear y Guardar Usuario
                         </PrimaryButton>
                     </div>
                 </form>
